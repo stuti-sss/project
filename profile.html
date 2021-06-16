@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Profile</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./css/profile.css">
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+ <script  src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+<script>
+
+// <!-- 
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional -->
+  
+  var firebaseConfig = {
+    apiKey: "AIzaSyBC4wxz3yVxFDHkwit6DyQMS-naf4wEpwI",
+    authDomain: "tok-tik-8aea1.firebaseapp.com",
+    databaseURL: "https://tok-tik-8aea1.firebaseio.com",
+    projectId: "tok-tik-8aea1",
+    storageBucket: "tok-tik-8aea1.appspot.com",
+    messagingSenderId: "253581632354",
+    appId: "1:253581632354:web:9941d40dd95d077c4d823b",
+    measurementId: "G-YDHC1JP9N2"
+  };
+  // Initialize Firebase
+
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+
+</script>
+<script type="text/javascript" src="js/profile.js"></script>
+
+
+<body>
+    
+<div id="profile-div"></div>
+
+
+<!-- 
+<td>
+<div style="width:120px;height:100px;position:relative;left:58px;top:50px;">
+ <div id="dig1" class="dig" style="top: -49.823px; left: 5.6814px;">1</div>
+ <div id="dig2" class="dig" style="top: -35.2232px; left: 20.5112px;">2</div>
+ <div id="dig3" class="dig" style="top: -15.1496px; left: 25.9997px;">3</div>
+ <div id="dig4" class="dig" style="top: 4.96459px; left: 20.6614px;">4</div>
+ <div id="dig5" class="dig" style="top: 19.6749px; left: 5.94126px;">5</div>
+ <div id="dig6" class="dig" style="top: 24.9996px; left: -14.1765px;">6</div>
+ <div id="dig7" class="dig" style="top: 19.4976px; left: -34.2464px;">7</div>
+ <div id="dig8" class="dig" style="top: 4.65796px; left: -48.8363px;">8</div>
+ <div id="dig9" class="dig" style="top: -15.5025px; left: -53.9968px;">9</div>
+ <div id="dig10" class="dig" style="top: -35.527px; left: -48.3314px;">10</div>
+ <div id="dig11" class="dig" style="top: -49.9953px; left: -33.3734px;">11</div>
+ <div id="dig12" class="dig" style="top: -54.9914px; left: -13.1715px;">12</div>
+
+ <div id="hour1" class="hour" style="top: 0px; left: 0px;"></div>
+ <div id="hour2" class="hour" style="top: -7.64857px; left: 2.34507px;"></div>
+ <div id="hour3" class="hour" style="top: -15.2971px; left: 4.69013px;"></div>
+ <div id="hour4" class="hour" style="top: -22.9457px; left: 7.0352px;"></div>
+
+ <div id="min1" class="min" style="top: 0px; left: 0px;"></div>
+ <div id="min2" class="min" style="top: 7.30577px; left: -3.25971px;"></div>
+ <div id="min3" class="min" style="top: 14.6115px; left: -6.51942px;"></div>
+ <div id="min4" class="min" style="top: 21.9173px; left: -9.77914px;"></div>
+ <div id="min5" class="min" style="top: 29.2231px; left: -13.0388px;"></div>
+
+ <div id="sec1" class="sec" style="top: 0px; left: 0px;"></div>
+ <div id="sec2" class="sec" style="top: -0.842563px; left: -7.95551px;"></div>
+ <div id="sec3" class="sec" style="top: -1.68513px; left: -15.911px;"></div>
+ <div id="sec4" class="sec" style="top: -2.52769px; left: -23.8665px;"></div>
+ <div id="sec5" class="sec" style="top: -3.37025px; left: -31.822px;"></div>
+ <div id="sec6" class="sec" style="top: -4.21282px; left: -39.7775px;"></div>
+</div>
+</td> -->
+
+
+    </body>   
+    <script>
+    function displayUserProfile(){
+    	console.log(currentUser.uid);
+    firebase.database().ref('users/Profile/'+currentUser.uid).once('value',function (snapshot) {
+    	  $("#profile-div").empty();
+    	  var profileHTMLitem="<h4>USER PROFILE</h4>";
+    	  
+    //	  snapshot.forEach(function(childsnapshot){
+    		 
+    		  var item=snapshot.val();
+    		  
+    		  item.key=snapshot.key;
+    		  
+    		  profileHTMLitem +="<div  class='profileHTMLitem'><hr><ul class='list'>";
+    		  profileHTMLitem +="<li class='list_item'>Firstname:<span>"+item.firstname+"</span></li>";
+    		  profileHTMLitem +="<li class='list_item'>Lastname:<span>"+item.lastname+"</span></li>";
+    		  profileHTMLitem +="<li class='list_item'>Email:<span>"+item.email+"</span></li>";
+    		  profileHTMLitem +="<li class='list_item'>Residential Address:<span>"+item.homeaddress+"</span></li>";
+    		  profileHTMLitem +="<li class='list_item'>Contact Number:<span>"+item.phonenumber+"</span></li>";
+    		  profileHTMLitem +="<li class='list_item'>Username:<span>"+item.username+"</span></li>";
+    		  profileHTMLitem +="</ul></div>";
+    		/*  item.key=childsnapshot.key;
+    	 	  console.log(item);
+    		  console.log(item.key); */
+    		  console.log(item);
+    	  //});
+    	 $("#profile-div").html(profileHTMLitem);
+    	});
+    
+    }
+    </script>
+    </html>
